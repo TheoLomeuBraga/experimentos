@@ -1,0 +1,231 @@
+[gd_scene load_steps=23 format=3 uid="uid://dr8rc4ctrnhg1"]
+
+[ext_resource type="Script" path="res://reconstituition/reconstituition_particle.gd" id="1_33o1s"]
+
+[sub_resource type="Gradient" id="Gradient_uhs8m"]
+colors = PackedColorArray(0, 0, 0, 1, 0.345098, 0.2, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_4inn3"]
+gradient = SubResource("Gradient_uhs8m")
+fill_from = Vector2(1, 1)
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_t6cu5"]
+panorama = SubResource("GradientTexture2D_4inn3")
+
+[sub_resource type="Sky" id="Sky_05cq0"]
+sky_material = SubResource("PanoramaSkyMaterial_t6cu5")
+
+[sub_resource type="Environment" id="Environment_ojau4"]
+background_mode = 2
+sky = SubResource("Sky_05cq0")
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 0.5
+
+[sub_resource type="Curve" id="Curve_7gb8h"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.384615), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_v0ohe"]
+curve = SubResource("Curve_7gb8h")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_gb6qc"]
+emission_shape = 2
+emission_sphere_radius = 1.0
+gravity = Vector3(0, 0, 0)
+radial_accel_min = -2.0
+radial_accel_max = -2.23517e-06
+scale_curve = SubResource("CurveTexture_v0ohe")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m3kbl"]
+albedo_color = Color(1, 1, 0, 1)
+emission_enabled = true
+emission = Color(1, 1, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_4htet"]
+material = SubResource("StandardMaterial3D_m3kbl")
+radius = 0.25
+height = 0.5
+radial_segments = 4
+rings = 1
+
+[sub_resource type="Curve" id="Curve_xd6v1"]
+min_value = -10.0
+max_value = 10.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.252632, 1.64835), 0.0, 0.0, 0, 0, Vector2(0.336842, 10), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_eyyco"]
+curve = SubResource("Curve_xd6v1")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_73h2o"]
+emission_shape = 2
+emission_sphere_radius = 0.2
+spread = 180.0
+initial_velocity_min = 2.5
+initial_velocity_max = 5.0
+gravity = Vector3(0, 0, 0)
+radial_accel_min = -100.0
+radial_accel_max = -2.23517e-06
+radial_accel_curve = SubResource("CurveTexture_eyyco")
+collision_mode = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xdu2h"]
+albedo_color = Color(0, 1, 1, 1)
+emission_enabled = true
+emission = Color(0, 1, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_f6am2"]
+material = SubResource("StandardMaterial3D_xdu2h")
+size = Vector3(0.2, 0.2, 0.2)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_2w6r4"]
+emission_shape = 3
+emission_box_extents = Vector3(10, 1, 10)
+collision_mode = 2
+collision_use_scale = true
+sub_emitter_mode = 2
+sub_emitter_amount_at_end = 1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_24bt1"]
+transparency = 1
+albedo_color = Color(0, 0.572549, 1, 0.14902)
+
+[sub_resource type="SphereMesh" id="SphereMesh_fj8qo"]
+material = SubResource("StandardMaterial3D_24bt1")
+radius = 0.1
+radial_segments = 4
+rings = 1
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_w8fun"]
+direction = Vector3(0, 1, 0)
+initial_velocity_max = 5.0
+collision_mode = 1
+collision_friction = 0.0
+collision_bounce = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_evg04"]
+transparency = 1
+albedo_color = Color(0.384314, 1, 1, 0.729412)
+
+[sub_resource type="SphereMesh" id="SphereMesh_3sh4s"]
+material = SubResource("StandardMaterial3D_evg04")
+radius = 0.05
+height = 0.1
+radial_segments = 4
+rings = 1
+
+[node name="ReconstituitionParticle" type="Node3D"]
+script = ExtResource("1_33o1s")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ojau4")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.965926, 0.258819, 0, -0.224144, 0.836516, 0.5, 0.12941, -0.482963, 0.866025, 0, 0, 0)
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.13998, 0, 0)
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_gb6qc")
+draw_pass_1 = SubResource("SphereMesh_4htet")
+
+[node name="GPUParticles3D2" type="GPUParticles3D" parent="."]
+amount = 256
+lifetime = 5.0
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_73h2o")
+draw_pass_1 = SubResource("BoxMesh_f6am2")
+
+[node name="GPUParticlesCollisionSphere3D" type="GPUParticlesCollisionSphere3D" parent="GPUParticles3D2"]
+radius = 0.177848
+
+[node name="base_camera" type="Node3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="base_camera"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6)
+
+[node name="test_enviorment" type="CSGCombiner3D" parent="."]
+use_collision = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="test_enviorment"]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="test_enviorment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -2, -1.5)
+size = Vector3(12, 1, 14)
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="test_enviorment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, -1, 0)
+height = 8.0
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="test_enviorment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -1, 0)
+height = 8.0
+
+[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="test_enviorment"]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -2.82843, -1, 2.82843)
+height = 8.0
+
+[node name="CSGCylinder3D4" type="CSGCylinder3D" parent="test_enviorment"]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 2.82843, -1, -2.82843)
+height = 8.0
+
+[node name="CSGCylinder3D5" type="CSGCylinder3D" parent="test_enviorment"]
+transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, -2.82843, -1, -2.82843)
+height = 8.0
+
+[node name="CSGCylinder3D6" type="CSGCylinder3D" parent="test_enviorment"]
+transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 2.82843, -1, 2.82843)
+height = 8.0
+
+[node name="rain" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8, 0)
+amount = 512
+sub_emitter = NodePath("../gotas")
+lifetime = 10.0
+interp_to_end = 1.0
+visibility_aabb = AABB(-10, -19, -10, 20, 20, 20)
+process_material = SubResource("ParticleProcessMaterial_2w6r4")
+draw_pass_1 = SubResource("SphereMesh_fj8qo")
+
+[node name="gotas" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0)
+amount = 4
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_w8fun")
+draw_pass_1 = SubResource("SphereMesh_3sh4s")
+
+[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -1.85967, -1.5)
+size = Vector3(13, 1, 15)
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control"]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+theme_override_constants/separation = 1000
+
+[node name="L" type="Button" parent="Control/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 50
+text = "<
+"
+
+[node name="R" type="Button" parent="Control/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 50
+text = ">
+"
+
+[connection signal="button_down" from="Control/HBoxContainer/L" to="." method="_on_l_button_down"]
+[connection signal="button_up" from="Control/HBoxContainer/L" to="." method="_on_l_button_up"]
+[connection signal="button_down" from="Control/HBoxContainer/R" to="." method="_on_r_button_down"]
+[connection signal="button_up" from="Control/HBoxContainer/R" to="." method="_on_r_button_up"]

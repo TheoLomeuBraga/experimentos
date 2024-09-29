@@ -1,0 +1,45 @@
+[gd_scene load_steps=8 format=3 uid="uid://bemoav565n22w"]
+
+[ext_resource type="AudioStream" uid="uid://druuyu6jhja72" path="res://dynamic_music/1_SID.wav" id="1_ft8vq"]
+[ext_resource type="Script" path="res://dynamic_music/dynamic_music.gd" id="1_jj0c3"]
+[ext_resource type="AudioStream" uid="uid://c31bytt4yh6tn" path="res://dynamic_music/2_Kicker.wav" id="2_5458m"]
+[ext_resource type="AudioStream" uid="uid://clvoidlyacx1j" path="res://dynamic_music/3_Vibed.wav" id="3_wnm7u"]
+[ext_resource type="AudioStream" uid="uid://dp0q8x7gme0tt" path="res://dynamic_music/4_bassdrum01.wav" id="4_k617q"]
+[ext_resource type="AudioStream" uid="uid://ddgwjwp1uywfc" path="res://dynamic_music/5_bassdrum02.wav" id="5_miowm"]
+[ext_resource type="AudioStream" uid="uid://b06c1bmguyeo" path="res://dynamic_music/6_kick_distorted01.wav" id="6_gul4w"]
+
+[node name="DynamicMusic" type="Node" node_paths=PackedStringArray("audio_players")]
+script = ExtResource("1_jj0c3")
+audio_players = [NodePath("AudioStreamPlayer"), NodePath("AudioStreamPlayer2"), NodePath("AudioStreamPlayer3"), NodePath("AudioStreamPlayer4"), NodePath("AudioStreamPlayer5"), NodePath("AudioStreamPlayer6")]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_ft8vq")
+volume_db = -80.0
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_5458m")
+volume_db = -80.0
+
+[node name="AudioStreamPlayer3" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_wnm7u")
+volume_db = -80.0
+
+[node name="AudioStreamPlayer4" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_k617q")
+volume_db = -80.0
+
+[node name="AudioStreamPlayer5" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_miowm")
+volume_db = -80.0
+
+[node name="AudioStreamPlayer6" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_gul4w")
+volume_db = -80.0
+
+[node name="HSlider" type="HSlider" parent="."]
+offset_top = 615.0
+offset_right = 1152.0
+offset_bottom = 648.0
+max_value = 6.0
+
+[connection signal="value_changed" from="HSlider" to="." method="_on_h_slider_value_changed"]

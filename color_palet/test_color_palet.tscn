@@ -1,0 +1,94 @@
+[gd_scene load_steps=9 format=3 uid="uid://bjy1wrc56bq46"]
+
+[sub_resource type="Environment" id="Environment_ppq8p"]
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+
+[sub_resource type="Shader" id="Shader_7bosu"]
+code = "// NOTE: Shader automatically converted from Godot Engine 4.3.stable's StandardMaterial3D.
+
+shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_burley, specular_schlick_ggx;
+
+uniform vec4 albedo : source_color;
+uniform sampler2D texture_albedo : source_color, filter_nearest, repeat_enable;
+uniform sampler2D color_palet : source_color, filter_nearest, repeat_disable;
+uniform float point_size : hint_range(0.1, 128.0, 0.1);
+
+uniform float roughness : hint_range(0.0, 1.0);
+uniform sampler2D texture_metallic : hint_default_white, filter_nearest, repeat_enable;
+uniform vec4 metallic_texture_channel;
+uniform sampler2D texture_roughness : hint_roughness_r, filter_nearest, repeat_enable;
+
+uniform float specular : hint_range(0.0, 1.0, 0.01);
+uniform float metallic : hint_range(0.0, 1.0, 0.01);
+
+uniform vec3 uv1_scale;
+uniform vec3 uv1_offset;
+uniform vec3 uv2_scale;
+uniform vec3 uv2_offset;
+
+void vertex() {
+	UV = UV * uv1_scale.xy + uv1_offset.xy;
+}
+
+void fragment() {
+	vec2 base_uv = UV;
+
+	
+	vec4 albedo_tex = texture(color_palet,texture(texture_albedo, base_uv).xy);
+	ALBEDO = albedo.rgb * albedo_tex.rgb;
+
+	float metallic_tex = dot(texture(texture_metallic, base_uv), metallic_texture_channel);
+	METALLIC = metallic_tex * metallic;
+	SPECULAR = specular;
+
+	vec4 roughness_texture_channel = vec4(1.0, 0.0, 0.0, 0.0);
+	float roughness_tex = dot(texture(texture_roughness, base_uv), roughness_texture_channel);
+	ROUGHNESS = roughness_tex * roughness;
+}
+"
+
+[sub_resource type="Gradient" id="Gradient_d658j"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.483146)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_57tr6"]
+gradient = SubResource("Gradient_d658j")
+
+[sub_resource type="Gradient" id="Gradient_k6esk"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.516854)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_4vvig"]
+gradient = SubResource("Gradient_k6esk")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jj2j0"]
+render_priority = 0
+shader = SubResource("Shader_7bosu")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/point_size = 1.0
+shader_parameter/roughness = 1.0
+shader_parameter/metallic_texture_channel = null
+shader_parameter/specular = 0.5
+shader_parameter/metallic = 0.0
+shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv2_scale = Vector3(1, 1, 1)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
+shader_parameter/texture_albedo = SubResource("GradientTexture2D_4vvig")
+shader_parameter/color_palet = SubResource("GradientTexture1D_57tr6")
+
+[sub_resource type="QuadMesh" id="QuadMesh_og2j2"]
+material = SubResource("ShaderMaterial_jj2j0")
+
+[node name="TestColorPalet" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ppq8p")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("QuadMesh_og2j2")

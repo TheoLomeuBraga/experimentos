@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://dy4vy4xfc83sw"]
+
+[ext_resource type="Script" path="res://test_transparencia/test_transparencia.gd" id="1_jyak6"]
+
+[sub_resource type="Environment" id="Environment_5baye"]
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_jyak6")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.707107, -0.353553, 0.612372, 0, 0.866025, 0.5, -0.707107, -0.353553, 0.612372, 2, 2, 2)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_5baye")

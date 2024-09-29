@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://ut0h5ap0m7sd"]
+
+[node name="test_csg" type="Node3D"]
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="CSGCombiner3D"]
+radius = 1.0
+
+[node name="CSGTorus3D" type="CSGTorus3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1.71247, 0, 0, 0, 1, 0, 0.0945705, 0)
+operation = 2
+outer_radius = 2.0

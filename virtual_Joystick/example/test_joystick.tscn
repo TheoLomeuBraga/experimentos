@@ -1,0 +1,49 @@
+[gd_scene load_steps=7 format=3 uid="uid://c3h42dbfehmk6"]
+
+[ext_resource type="PackedScene" uid="uid://n3rs4ivy3g6t" path="res://virtual_Joystick/virtual_Joystick.tscn" id="1_c5k1e"]
+[ext_resource type="Script" path="res://virtual_Joystick/example/test_joystick.gd" id="1_hw6jf"]
+
+[sub_resource type="Gradient" id="Gradient_ms5et"]
+colors = PackedColorArray(1, 0, 0, 1, 0, 1, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_0dky5"]
+gradient = SubResource("Gradient_ms5et")
+
+[sub_resource type="Gradient" id="Gradient_3jicm"]
+colors = PackedColorArray(0, 1, 0, 1, 0, 0, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_or71y"]
+gradient = SubResource("Gradient_3jicm")
+
+[node name="TestJoystick" type="Node2D"]
+script = ExtResource("1_hw6jf")
+
+[node name="VirtualJoystick" parent="." instance=ExtResource("1_c5k1e")]
+position = Vector2(12, 320)
+scale = Vector2(10, 10)
+visibility_mode = 1
+
+[node name="VirtualJoystick2" parent="." instance=ExtResource("1_c5k1e")]
+position = Vector2(436, 144)
+scale = Vector2(10, 10)
+visibility_mode = 1
+
+[node name="Label" type="Label" parent="."]
+offset_left = 746.0
+offset_right = 1146.0
+offset_bottom = 144.0
+theme_override_font_sizes/font_size = 50
+text = "X: 0 Y: 0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="."]
+position = Vector2(519, 565)
+texture_normal = SubResource("GradientTexture2D_0dky5")
+
+[node name="TouchScreenButton2" type="TouchScreenButton" parent="."]
+position = Vector2(624, 565)
+texture_normal = SubResource("GradientTexture2D_or71y")
+
+[connection signal="pressed" from="TouchScreenButton" to="." method="_on_touch_screen_button_pressed"]
+[connection signal="pressed" from="TouchScreenButton2" to="." method="_on_touch_screen_button_2_pressed"]

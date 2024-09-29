@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://n3rs4ivy3g6t"]
+
+[ext_resource type="Texture2D" uid="uid://81inbnqxsk6l" path="res://virtual_Joystick/base.png" id="1_fs37u"]
+[ext_resource type="Texture2D" uid="uid://c5wm42iotbqkk" path="res://virtual_Joystick/point.png" id="2_tuv6h"]
+[ext_resource type="Script" path="res://virtual_Joystick/virtual_joystick.gd" id="2_xxgpy"]
+
+[node name="VirtualJoystick" type="TouchScreenButton"]
+texture_normal = ExtResource("1_fs37u")
+script = ExtResource("2_xxgpy")
+
+[node name="point" type="TouchScreenButton" parent="."]
+texture_normal = ExtResource("2_tuv6h")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]
+[connection signal="released" from="." to="." method="_on_released"]
