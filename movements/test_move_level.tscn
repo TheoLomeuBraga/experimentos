@@ -77,8 +77,8 @@ data = {
 }
 metadata/_editor_floor_ = Vector3(0, 0, 0)
 
-[node name="3dCharter" parent="." instance=ExtResource("3_rl4tv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 7.56218, 0.860432)
-
 [node name="MeshInstance3D" parent="." instance=ExtResource("4_t3qxe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 1, 1)
+
+[node name="3dCharter" parent="." instance=ExtResource("3_rl4tv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23, 2, 1)

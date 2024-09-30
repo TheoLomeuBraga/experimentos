@@ -66,6 +66,9 @@ func air_state(delta: float) -> void:
 	input_dir = ($Control/camera_base.basis.x * input_dir.x) + ($Control/camera_base.basis.z * input_dir.z)
 	velocity.x = -input_dir.x * delta * floor_speed 
 	velocity.z = -input_dir.z * delta * floor_speed
+	
+	if $ShapeCastCealing.is_colliding() and fall_time < 0.5:
+		fall_time = 0.5
 
 func _process(delta: float) -> void:
 	manage_camera(delta)

@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://dosgohrwwfq3i"]
+
+[ext_resource type="Script" path="res://movements/FPS/fps.gd" id="1_xbl04"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7spex"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_fy6vv"]
+height = 1.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_t31ll"]
+height = 0.75
+
+[node name="Fps" type="CharacterBody3D"]
+script = ExtResource("1_xbl04")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_7spex")
+
+[node name="ShapeCastCealing" type="ShapeCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.62439, 0)
+shape = SubResource("CylinderShape3D_fy6vv")
+
+[node name="ShapeCastFloor" type="ShapeCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.150255, 0)
+shape = SubResource("CylinderShape3D_t31ll")
+
+[node name="RayCastFloor" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+target_position = Vector3(0, -0.5, 0)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.518377, 0)
+fov = 90.0
