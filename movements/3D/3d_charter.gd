@@ -4,7 +4,7 @@ extends CharacterBody3D
 
 func _ready() -> void:
 	$Control/camera_base.global_position = global_position
-	$Control/camera_base.rotation = rotation + Vector3(0,90,0)
+	$Control/camera_base.rotation_degrees = rotation_degrees + Vector3(0,90,0)
 	pass
 
 

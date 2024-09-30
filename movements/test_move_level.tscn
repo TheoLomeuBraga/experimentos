@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://8ht38n1ppsrw"]
+[gd_scene load_steps=6 format=3 uid="uid://8ht38n1ppsrw"]
 
 [ext_resource type="MeshLibrary" uid="uid://ddc4ms6oblbwl" path="res://movements/tilemap_3d/test_tileset_2_5D.tres" id="1_b01vj"]
 [ext_resource type="PackedScene" uid="uid://jfnyjnfjswk8" path="res://movements/box/box.tscn" id="1_lchbh"]
 [ext_resource type="PackedScene" uid="uid://brre3sv00u266" path="res://movements/3D/3D_charter.tscn" id="3_rl4tv"]
+[ext_resource type="PackedScene" uid="uid://c3ojicx0ttieg" path="res://movements/moving_plataform/plataform.tscn" id="4_t3qxe"]
 
 [sub_resource type="Environment" id="Environment_ihaby"]
 background_mode = 1
@@ -77,4 +78,7 @@ data = {
 metadata/_editor_floor_ = Vector3(0, 0, 0)
 
 [node name="3dCharter" parent="." instance=ExtResource("3_rl4tv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39, 7.56218, 0.860432)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 7.56218, 0.860432)
+
+[node name="MeshInstance3D" parent="." instance=ExtResource("4_t3qxe")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 1, 1)
