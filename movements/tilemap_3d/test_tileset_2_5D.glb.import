@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://bs2wbrgmhcw3a"
-path="res://.godot/imported/test_tileset_2_5D.glb-56787cb084de79ee0b5e3276c4eeeff0.scn"
+uid="uid://2r5do458f5p8"
+path="res://.godot/imported/test_tileset_2_5D.glb-a14f5135df7de30acdb4e730438eb48c.scn"
 
 [deps]
 
-source_file="res://movements/test_tileset_2_5D.glb"
-dest_files=["res://.godot/imported/test_tileset_2_5D.glb-56787cb084de79ee0b5e3276c4eeeff0.scn"]
+source_file="res://movements/tilemap_3d/test_tileset_2_5D.glb"
+dest_files=["res://.godot/imported/test_tileset_2_5D.glb-a14f5135df7de30acdb4e730438eb48c.scn"]
 
 [params]
 

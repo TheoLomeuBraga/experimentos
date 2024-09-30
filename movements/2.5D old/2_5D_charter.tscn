@@ -1,54 +1,61 @@
-[gd_scene load_steps=9 format=3 uid="uid://r3xbmat4si26"]
+[gd_scene load_steps=10 format=3 uid="uid://d115rrd06g6wi"]
 
-[ext_resource type="Script" path="res://movements/charter/basic_movement/basic_movement.gd" id="1_f05yg"]
+[ext_resource type="Script" path="res://movements/2.5D old/2_5d_charter.gd" id="1_rc2ed"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_57xbc"]
 friction = 10.0
 rough = true
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sr4fy"]
+[sub_resource type="Curve" id="Curve_ngqrb"]
+min_value = -1.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, -1), 0.0, 0.0, 0, 0]
+point_count = 2
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_4dfy6"]
-height = 0.55
-radius = 0.4
+[sub_resource type="BoxShape3D" id="BoxShape3D_7r14r"]
+size = Vector3(1, 2, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ryx6t"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_m4uxp"]
+size = Vector3(1, 0.25, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oygda"]
 albedo_color = Color(0, 0.603922, 1, 1)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_spafo"]
-material = SubResource("StandardMaterial3D_ryx6t")
+material = SubResource("StandardMaterial3D_oygda")
 radial_segments = 8
 rings = 2
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b24bm"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1dr6w"]
 albedo_color = Color(0, 0, 0, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_focgm"]
-material = SubResource("StandardMaterial3D_b24bm")
+material = SubResource("StandardMaterial3D_1dr6w")
 radius = 0.05
 height = 0.2
 radial_segments = 4
 rings = 1
 
-[node name="basic_movement" type="RigidBody3D"]
+[node name="2_5D_charter" type="RigidBody3D"]
 axis_lock_angular_x = true
 axis_lock_angular_y = true
 axis_lock_angular_z = true
 physics_material_override = SubResource("PhysicsMaterial_57xbc")
 contact_monitor = true
 max_contacts_reported = 5
-script = ExtResource("1_f05yg")
+script = ExtResource("1_rc2ed")
+air_control = true
+gravity_control = true
+gravity_control_curve = SubResource("Curve_ngqrb")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("CapsuleShape3D_sr4fy")
+shape = SubResource("BoxShape3D_7r14r")
 
 [node name="floorChekerRay" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.485707, 0)
-target_position = Vector3(0, -1.1, 0)
 
 [node name="floorChekerShape" type="ShapeCast3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.785732, 0)
-shape = SubResource("CylinderShape3D_4dfy6")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.1214, 0)
+shape = SubResource("BoxShape3D_m4uxp")
 target_position = Vector3(0, 0, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
@@ -61,5 +68,16 @@ mesh = SubResource("SphereMesh_focgm")
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="MeshInstance3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.229, 0.417, -0.418)
 mesh = SubResource("SphereMesh_focgm")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="camera_base" type="Node3D" parent="Control"]
+
+[node name="Camera3D" type="Camera3D" parent="Control/camera_base"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 10, 2, 0)
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

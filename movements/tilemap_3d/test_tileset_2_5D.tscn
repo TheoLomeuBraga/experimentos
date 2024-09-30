@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dndfdxfe5h2fx"]
+
+[ext_resource type="PackedScene" uid="uid://2r5do458f5p8" path="res://movements/tilemap_3d/test_tileset_2_5D.glb" id="1_laq0k"]
+
+[node name="TestTileset25d" type="Node3D"]
+
+[node name="test_tileset_2_5D" parent="." instance=ExtResource("1_laq0k")]

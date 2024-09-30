@@ -1,0 +1,85 @@
+[gd_scene load_steps=9 format=3 uid="uid://dek3khkvkv0fa"]
+
+[ext_resource type="Script" path="res://movements/2_5D/2_5d.gd" id="1_q16mr"]
+
+[sub_resource type="Curve" id="Curve_4c7w0"]
+min_value = -1.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, -1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ncavp"]
+size = Vector3(1, 2, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qcf8k"]
+size = Vector3(0.8, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ryx6t"]
+albedo_color = Color(0, 0.603922, 1, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_lkis1"]
+material = SubResource("StandardMaterial3D_ryx6t")
+radial_segments = 8
+rings = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b24bm"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_0870f"]
+material = SubResource("StandardMaterial3D_b24bm")
+radius = 0.05
+height = 0.2
+radial_segments = 4
+rings = 1
+
+[node name="25d" type="CharacterBody3D"]
+script = ExtResource("1_q16mr")
+fall_curve = SubResource("Curve_4c7w0")
+
+[node name="ledje_detector" type="Node3D" parent="."]
+
+[node name="L" type="RayCast3D" parent="ledje_detector"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 1)
+hit_back_faces = false
+
+[node name="R" type="RayCast3D" parent="ledje_detector"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -1)
+hit_back_faces = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_ncavp")
+
+[node name="ShapeCastCealing" type="ShapeCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+shape = SubResource("BoxShape3D_qcf8k")
+
+[node name="ShapeCastFloor" type="ShapeCast3D" parent="."]
+shape = SubResource("BoxShape3D_qcf8k")
+
+[node name="RayCastFloor" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+target_position = Vector3(0, -0.5, 0)
+
+[node name="display_model" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="display_model"]
+mesh = SubResource("CapsuleMesh_lkis1")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="display_model/MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.229286, 0.417468, -0.417602)
+mesh = SubResource("SphereMesh_0870f")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="display_model/MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.229, 0.417, -0.418)
+mesh = SubResource("SphereMesh_0870f")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="camera_base" type="Node3D" parent="Control"]
+
+[node name="Camera3D" type="Camera3D" parent="Control/camera_base"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 10, 2, 0)

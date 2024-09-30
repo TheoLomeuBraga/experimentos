@@ -1,4 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://8ht38n1ppsrw"]
+[gd_scene load_steps=5 format=3 uid="uid://8ht38n1ppsrw"]
+
+[ext_resource type="MeshLibrary" uid="uid://ddc4ms6oblbwl" path="res://movements/tilemap_3d/test_tileset_2_5D.tres" id="1_b01vj"]
+[ext_resource type="PackedScene" uid="uid://jfnyjnfjswk8" path="res://movements/box/box.tscn" id="1_lchbh"]
+[ext_resource type="PackedScene" uid="uid://dek3khkvkv0fa" path="res://movements/2_5D/2_5D.tscn" id="3_7ne0b"]
 
 [sub_resource type="Environment" id="Environment_ihaby"]
 background_mode = 1
@@ -7,12 +11,43 @@ ambient_light_color = Color(1, 1, 1, 1)
 ambient_light_energy = 0.5
 
 [node name="TestMoveLevel" type="CSGCombiner3D"]
+use_collision = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_ihaby")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.866025, 0.433013, -0.25, 0, 0.5, 0.866025, 0.5, -0.75, 0.433013, 0, 18, 0)
+
+[node name="Box" parent="." instance=ExtResource("1_lchbh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 1, 0.5)
+axis_lock_linear_z = true
+axis_lock_angular_y = true
+
+[node name="Box2" parent="." instance=ExtResource("1_lchbh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1, 0.5)
+axis_lock_linear_z = true
+axis_lock_angular_y = true
+
+[node name="Box3" parent="." instance=ExtResource("1_lchbh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 1, 0.5)
+axis_lock_linear_z = true
+axis_lock_angular_y = true
+
+[node name="Box4" parent="." instance=ExtResource("1_lchbh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 1, 0.5)
+axis_lock_linear_z = true
+axis_lock_angular_y = true
+
+[node name="Box5" parent="." instance=ExtResource("1_lchbh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19, 1, 0.5)
+axis_lock_linear_z = true
+axis_lock_angular_y = true
+
+[node name="Box6" parent="." instance=ExtResource("1_lchbh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.4793, 2, 0.5)
+axis_lock_linear_z = true
+axis_lock_angular_y = true
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 size = Vector3(100, 1, 100)
@@ -32,3 +67,14 @@ size = Vector3(1, 20, 100)
 [node name="CSGBox3D5" type="CSGBox3D" parent="."]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2.18557e-06, 10, -50)
 size = Vector3(1, 20, 100)
+
+[node name="GridMap" type="GridMap" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh_library = ExtResource("1_b01vj")
+data = {
+"cells": PackedInt32Array(65534, 0, 0, 65532, 0, 1048578, 65534, 65534, 2, 0, 0, 1441794, 65534, 2, 655362, 65533, 0, 1048579, 65534, 65535, 3, 65535, 0, 1441795, 65534, 1, 655363, 65533, 65535, 1048581, 65535, 65535, 5, 65535, 1, 1441797, 65533, 1, 655365, 65526, 0, 655360, 65525, 0, 1048577, 65526, 65535, 1, 65527, 0, 1441793, 65526, 1, 655361, 65525, 65535, 1048580, 65527, 65535, 4, 65527, 1, 1441796, 65525, 1, 655364, 7, 1, 655366, 5, 1, 1048582, 5, 65535, 6, 7, 65535, 1441798, 65541, 65535, 1048580, 65543, 65535, 4, 65543, 1, 1441796, 65541, 1, 655364, 65542, 0, 655360, 7, 0, 655360, 6, 65535, 655360, 5, 0, 655360, 6, 1, 655360, 65542, 65535, 1, 65543, 0, 1441793, 65541, 0, 1048577, 65542, 1, 655361, 65521, 0, 0, 65520, 0, 0, 131056, 0, 0, 131055, 0, 0, 196591, 0, 0, 65519, 0, 0, 65518, 0, 0, 131054, 0, 0, 131053, 0, 0, 65517, 0, 0, 65516, 0, 0, 196590, 0, 0, 196589, 0, 0, 131052, 0, 0, 196588, 0, 0)
+}
+metadata/_editor_floor_ = Vector3(0, 0, 0)
+
+[node name="25d" parent="." instance=ExtResource("3_7ne0b")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -9, 1.56872, 0.5)
