@@ -73,6 +73,9 @@ func air_state(delta: float) -> void:
 	if fall_curve.sample(fall_time) < 0 and on_ledge:
 		state = 2
 		velocity = Vector3.ZERO
+	
+	if $ShapeCastCealing.is_colliding() and fall_time < 0.5:
+		fall_time = 0.5
 
 func ledge_state(delta: float) -> void:
 	

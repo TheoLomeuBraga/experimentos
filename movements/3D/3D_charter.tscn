@@ -1,59 +1,52 @@
-[gd_scene load_steps=9 format=3 uid="uid://dek3khkvkv0fa"]
+[gd_scene load_steps=10 format=3 uid="uid://brre3sv00u266"]
 
-[ext_resource type="Script" path="res://movements/2_5D/2_5d.gd" id="1_q16mr"]
+[ext_resource type="Script" path="res://movements/3D/3d_charter.gd" id="1_1un67"]
 
-[sub_resource type="Curve" id="Curve_4c7w0"]
+[sub_resource type="Curve" id="Curve_cciv2"]
 min_value = -1.0
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, -1), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_ncavp"]
-size = Vector3(1, 2, 1)
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ldu2x"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_qcf8k"]
-size = Vector3(0.8, 1, 1)
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_fg3rg"]
+height = 1.0
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ekcm6"]
-albedo_color = Color(0, 0.603922, 1, 1)
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_06s6f"]
+height = 0.75
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_lkis1"]
-material = SubResource("StandardMaterial3D_ekcm6")
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r1iqr"]
+albedo_color = Color(0, 0.603922, 0, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_00jac"]
+material = SubResource("StandardMaterial3D_r1iqr")
 radial_segments = 8
 rings = 2
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_srh5p"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b24bm"]
 albedo_color = Color(0, 0, 0, 1)
 
-[sub_resource type="SphereMesh" id="SphereMesh_0870f"]
-material = SubResource("StandardMaterial3D_srh5p")
+[sub_resource type="SphereMesh" id="SphereMesh_ibmtf"]
+material = SubResource("StandardMaterial3D_b24bm")
 radius = 0.05
 height = 0.2
 radial_segments = 4
 rings = 1
 
-[node name="25d" type="CharacterBody3D"]
-script = ExtResource("1_q16mr")
-fall_curve = SubResource("Curve_4c7w0")
-
-[node name="ledje_detector" type="Node3D" parent="."]
-
-[node name="L" type="RayCast3D" parent="ledje_detector"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 1)
-hit_back_faces = false
-
-[node name="R" type="RayCast3D" parent="ledje_detector"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -1)
-hit_back_faces = false
+[node name="3dCharter" type="CharacterBody3D"]
+script = ExtResource("1_1un67")
+fall_curve = SubResource("Curve_cciv2")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("BoxShape3D_ncavp")
+shape = SubResource("CapsuleShape3D_ldu2x")
 
 [node name="ShapeCastCealing" type="ShapeCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.62439, 0)
-shape = SubResource("BoxShape3D_qcf8k")
+shape = SubResource("CylinderShape3D_fg3rg")
 
 [node name="ShapeCastFloor" type="ShapeCast3D" parent="."]
-shape = SubResource("BoxShape3D_qcf8k")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.150255, 0)
+shape = SubResource("CylinderShape3D_06s6f")
 
 [node name="RayCastFloor" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
@@ -62,16 +55,17 @@ target_position = Vector3(0, -0.5, 0)
 [node name="display_model" type="Node3D" parent="."]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="display_model"]
-mesh = SubResource("CapsuleMesh_lkis1")
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_00jac")
 skeleton = NodePath("../..")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="display_model/MeshInstance3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.229286, 0.417468, -0.417602)
-mesh = SubResource("SphereMesh_0870f")
+mesh = SubResource("SphereMesh_ibmtf")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="display_model/MeshInstance3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.229, 0.417, -0.418)
-mesh = SubResource("SphereMesh_0870f")
+mesh = SubResource("SphereMesh_ibmtf")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
