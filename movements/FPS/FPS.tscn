@@ -1,6 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://dosgohrwwfq3i"]
+[gd_scene load_steps=6 format=3 uid="uid://dosgohrwwfq3i"]
 
 [ext_resource type="Script" path="res://movements/FPS/fps.gd" id="1_xbl04"]
+
+[sub_resource type="Curve" id="Curve_mbt6w"]
+min_value = -1.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.5, 0), -2.23944, -2.23944, 0, 0, Vector2(1, -1), 0.0, 0.0, 0, 0]
+point_count = 3
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7spex"]
 
@@ -12,6 +17,7 @@ height = 0.75
 
 [node name="Fps" type="CharacterBody3D"]
 script = ExtResource("1_xbl04")
+fall_curve = SubResource("Curve_mbt6w")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_7spex")
@@ -25,7 +31,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.150255, 0)
 shape = SubResource("CylinderShape3D_t31ll")
 
 [node name="RayCastFloor" type="RayCast3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.974696, 0)
 target_position = Vector3(0, -0.5, 0)
 
 [node name="Camera3D" type="Camera3D" parent="."]

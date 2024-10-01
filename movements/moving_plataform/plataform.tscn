@@ -2,17 +2,6 @@
 
 [ext_resource type="Script" path="res://movements/moving_plataform/plataform.gd" id="1_0kfr6"]
 
-[sub_resource type="Animation" id="Animation_pc8ll"]
-resource_name = "move_up_down"
-length = 2.0
-tracks/0/type = "position_3d"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 1, 0, 10, 0, 2, 1, 0, 0, 0)
-
 [sub_resource type="Animation" id="Animation_tegn4"]
 length = 0.001
 tracks/0/type = "position_3d"
@@ -22,6 +11,17 @@ tracks/0/path = NodePath(".")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0)
+
+[sub_resource type="Animation" id="Animation_pc8ll"]
+resource_name = "move_up_down"
+length = 4.0
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 1, 0, 10, 0, 2.03333, 1, 0, 10, -10, 3, 1, 0, 10, 0, 4, 1, 0, 0, 0)
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hrxcn"]
 _data = {

@@ -1,0 +1,154 @@
+[gd_scene load_steps=6 format=3 uid="uid://5k8umefslhsi"]
+
+[ext_resource type="Script" path="res://movements/FPS_OS/fps_os.gd" id="1_30kxo"]
+
+[sub_resource type="Curve" id="Curve_70omk"]
+min_value = -1.0
+_data = [Vector2(0, 1), 0.0, 3.23746, 0, 0, Vector2(1, -1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7spex"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_fy6vv"]
+height = 1.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_t31ll"]
+height = 0.75
+
+[node name="Fps_os" type="CharacterBody3D"]
+script = ExtResource("1_30kxo")
+fall_curve = SubResource("Curve_70omk")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_7spex")
+
+[node name="ShapeCastCealing" type="ShapeCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.62439, 0)
+shape = SubResource("CylinderShape3D_fy6vv")
+
+[node name="ShapeCastFloor" type="ShapeCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.150255, 0)
+shape = SubResource("CylinderShape3D_t31ll")
+
+[node name="RayCastFloor" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.974696, 0)
+target_position = Vector3(0, -0.5, 0)
+
+[node name="camera_position" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.518377, 0)
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="camera_position"]
+remote_path = NodePath("../../OS/drone_camera_window/Camera3D")
+
+[node name="OS" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="OS"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.565765, 1.2514e-06, 0.339648, 1)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="OS"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -84.0
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 1
+
+[node name="drone_camera" type="Button" parent="OS/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "drone
+camera
+"
+
+[node name="drone_status" type="Button" parent="OS/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "drone
+status"
+
+[node name="drone_camera_window" type="Window" parent="OS"]
+initial_position = 1
+size = Vector2i(500, 400)
+visible = false
+
+[node name="Camera3D" type="Camera3D" parent="OS/drone_camera_window"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.518377, 0)
+fov = 90.0
+
+[node name="drone_status_window" type="Window" parent="OS"]
+initial_position = 1
+size = Vector2i(400, 100)
+visible = false
+
+[node name="Control" type="Control" parent="OS/drone_status_window"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="OS/drone_status_window/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.227451, 0.227451, 0.396078, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="OS/drone_status_window/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="OS/drone_status_window/Control/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="OS/drone_status_window/Control/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "integrity:"
+
+[node name="ProgressBar" type="ProgressBar" parent="OS/drone_status_window/Control/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+value = 75.0
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="OS/drone_status_window/Control/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="OS/drone_status_window/Control/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "power:"
+
+[node name="ProgressBar" type="ProgressBar" parent="OS/drone_status_window/Control/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+value = 50.0
+
+[connection signal="pressed" from="OS/HBoxContainer/drone_camera" to="." method="_on_drone_camera_pressed"]
+[connection signal="pressed" from="OS/HBoxContainer/drone_status" to="." method="_on_drone_status_pressed"]
+[connection signal="close_requested" from="OS/drone_camera_window" to="." method="_on_drone_camera_close_requested"]
+[connection signal="close_requested" from="OS/drone_status_window" to="." method="_on_drone_status_window_close_requested"]
