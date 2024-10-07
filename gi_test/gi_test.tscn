@@ -1,0 +1,50 @@
+[gd_scene load_steps=4 format=3 uid="uid://b5ayjuol5btaf"]
+
+[ext_resource type="PackedScene" uid="uid://dosgohrwwfq3i" path="res://movements/FPS/FPS.tscn" id="1_2ec3k"]
+
+[sub_resource type="Environment" id="Environment_iao27"]
+sdfgi_enabled = true
+sdfgi_min_cell_size = 0.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0xnlx"]
+metallic = 1.0
+metallic_specular = 0.0
+roughness = 0.0
+
+[node name="GiTest" type="Node3D"]
+
+[node name="Fps" parent="." instance=ExtResource("1_2ec3k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 42)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_iao27")
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
+use_collision = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D"]
+size = Vector3(100, 1, 100)
+material = SubResource("StandardMaterial3D_0xnlx")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 24)
+radius = 3.0
+height = 18.0
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, -19)
+radius = 3.0
+height = 18.0
+
+[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36, 6, -19)
+radius = 3.0
+height = 18.0
+
+[node name="CSGCylinder3D4" type="CSGCylinder3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29, 6, 29)
+radius = 3.0
+height = 18.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.707107, 0.707107, 0, -0.707107, -0.707107, -9, 19, 0)
